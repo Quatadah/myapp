@@ -12,10 +12,15 @@ public class MessageConsumer {
 
     @Autowired MessageController messageController;
 
-    @KafkaListener(id = "hq-chat", topics = "cities")
-    public String received(String msg){        
-        log.info("message received : {}", msg);
-        messageController.addToMessage(msg);        
-        return msg;
+    @KafkaListener(id = "hq-chat", topics = "msg.json")
+    public Message received(Message msg){
+        try {
+            log.info("message received : {}", msg);
+            messageController.addToMessage(msg);
+            return msg;
+        } catch (Exception e){
+            return null;
+        }
+
     }
 }

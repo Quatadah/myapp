@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
 public class MessageProducer {    
-    public static final String TOPIC = "cities";
+    public static final String TOPIC = "msg.json";
     private final Logger log = LoggerFactory.getLogger(CityLogger.class);
 
     @Autowired
-    KafkaTemplate<String, String> kafkaTemplate;
+    KafkaTemplate<String, Message> kafkaTemplate;
     
-    public String send(String msg){
+    public Message send(Message msg){
         System.out.println("producer : " + msg);
-        kafkaTemplate.send(TOPIC, msg + Instant.now());
+        kafkaTemplate.send(TOPIC, msg);
         return msg;
     }
 
