@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/messages")
 public class MessageController {
     //public static final String TOPIC = "log";
-    private final Logger log = LoggerFactory.getLogger(CityLogger.class);
+    private final Logger log = LoggerFactory.getLogger(MessageController.class);
     private List<Message> messages = new ArrayList<Message>();
 
     @Autowired
@@ -34,7 +34,7 @@ public class MessageController {
     @GetMapping
     public List<Message> get(){
         List<Message> toShow = new ArrayList<Message>();
-        toShow.add(new Message("Quatadah", "Afin a hamza"));
+                
         synchronized (this) {
             for (int i = messages.size() - 1; i >= Math.max(messages.size() - 10, 0); i--) {
                 toShow.add(messages.get(i));

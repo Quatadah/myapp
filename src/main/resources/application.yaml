@@ -1,9 +1,15 @@
 spring:
     kafka:
         bootstrap-servers: breisen.datamix.ovh:9093
+        listener:
+            ack-mode: manual
         producer:
             value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
         consumer:
-            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            enable-auto-commit: false
+            auto-offset-reset: earliest
+            value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
             properties:
-                spring.json.trusted.packages: "com.enseirb.myapp.myapp"
+                spring.json.use.type.headers: false
+                spring.json.value.default.type: com.enseirb.myapp.myapp.Message
+                spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer

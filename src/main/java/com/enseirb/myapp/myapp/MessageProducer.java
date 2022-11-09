@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
 public class MessageProducer {    
-    public static final String TOPIC = "msg.json";
-    private final Logger log = LoggerFactory.getLogger(CityLogger.class);
+    public static final String TOPIC = "msg.json.hq";
+    private final Logger log = LoggerFactory.getLogger(MessageProducer.class);
 
     @Autowired
     KafkaTemplate<String, Message> kafkaTemplate;
